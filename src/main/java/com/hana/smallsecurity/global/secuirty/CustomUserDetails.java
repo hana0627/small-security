@@ -1,6 +1,7 @@
 package com.hana.smallsecurity.global.secuirty;
 
 import com.hana.smallsecurity.application.domain.User;
+import com.hana.smallsecurity.application.domain.constant.EncryptionAlgorithm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,8 +17,12 @@ import java.util.Collection;
 public class CustomUserDetails implements UserDetails {
     private final User user;
 
-    private final User getUser() {
+    public final User getUser() {
         return user;
+    }
+
+    public static final EncryptionAlgorithm getUserAlgorithm(CustomUserDetails customUserDetails) {
+        return customUserDetails.getUser().getAlgorithm();
     }
 
     @Override
